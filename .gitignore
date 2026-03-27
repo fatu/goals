@@ -12,3 +12,13 @@ wheels/
 # Runtime state
 .daily_state.json
 .year_state.json
+.focus_state.json
+
+# Personal data
+goals.json
+completed_log.json
+focus_log.json
+attachments/
+
+# Xcode user data
+xcuserdata/

@@ -1,0 +1,705 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10001 /* GoalsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001 /* GoalsApp.swift */; };
+		A10002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002 /* ContentView.swift */; };
+		A10003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10003 /* Assets.xcassets */; };
+		A10004 /* GoalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004 /* GoalsData.swift */; };
+		A10005 /* DailyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005 /* DailyState.swift */; };
+		A10006 /* YearState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006 /* YearState.swift */; };
+		A10007 /* CheckStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007 /* CheckStatus.swift */; };
+		A10008 /* LogModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008 /* LogModels.swift */; };
+		A10009 /* iCloudFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009 /* iCloudFileManager.swift */; };
+		A10010 /* GoalsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010 /* GoalsStore.swift */; };
+		A10011 /* DailyGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011 /* DailyGoalsView.swift */; };
+		A10012 /* DailyGoalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012 /* DailyGoalRow.swift */; };
+		A10013 /* YearGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013 /* YearGoalsView.swift */; };
+		A10014 /* YearGoalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10014 /* YearGoalCard.swift */; };
+		A10015 /* BacklogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10015 /* BacklogView.swift */; };
+		A10016 /* BulbsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016 /* BulbsView.swift */; };
+		A10017 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017 /* LogView.swift */; };
+		A10018 /* GoalDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018 /* GoalDetailSheet.swift */; };
+		A10019 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019 /* CategoryPicker.swift */; };
+		A10020 /* CategoryTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020 /* CategoryTag.swift */; };
+		A10021 /* StatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021 /* StatusBadge.swift */; };
+		A10022 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022 /* Constants.swift */; };
+		A10023 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10025 /* EmptyStateView.swift */; };
+		A10024 /* UndoToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10026 /* UndoToast.swift */; };
+		A10025 /* AddBacklogIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10027 /* AddBacklogIntent.swift */; };
+		A10026 /* GoalsShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10028 /* GoalsShortcuts.swift */; };
+		A10027 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20005 /* WidgetData.swift */; };
+		A10030 /* AlarmsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10030 /* AlarmsView.swift */; };
+		A20001 /* GoalsWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20001 /* GoalsWidgetBundle.swift */; };
+		A20002 /* GoalsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20002 /* GoalsWidget.swift */; };
+		A20003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B20004 /* Assets.xcassets */; };
+		A20004 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20005 /* WidgetData.swift */; };
+		A20005 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022 /* Constants.swift */; };
+		A20006 /* GoalsWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B20006 /* GoalsWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CI0001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E10004 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E20001;
+			remoteInfo = GoalsWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		W10004 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A20006 /* GoalsWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B10000 /* GoalsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoalsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10001 /* GoalsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsApp.swift; sourceTree = "<group>"; };
+		B10002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B10003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10004 /* GoalsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsData.swift; sourceTree = "<group>"; };
+		B10005 /* DailyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyState.swift; sourceTree = "<group>"; };
+		B10006 /* YearState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearState.swift; sourceTree = "<group>"; };
+		B10007 /* CheckStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckStatus.swift; sourceTree = "<group>"; };
+		B10008 /* LogModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogModels.swift; sourceTree = "<group>"; };
+		B10009 /* iCloudFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudFileManager.swift; sourceTree = "<group>"; };
+		B10010 /* GoalsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsStore.swift; sourceTree = "<group>"; };
+		B10011 /* DailyGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGoalsView.swift; sourceTree = "<group>"; };
+		B10012 /* DailyGoalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGoalRow.swift; sourceTree = "<group>"; };
+		B10013 /* YearGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearGoalsView.swift; sourceTree = "<group>"; };
+		B10014 /* YearGoalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearGoalCard.swift; sourceTree = "<group>"; };
+		B10015 /* BacklogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacklogView.swift; sourceTree = "<group>"; };
+		B10016 /* BulbsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulbsView.swift; sourceTree = "<group>"; };
+		B10017 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		B10018 /* GoalDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailSheet.swift; sourceTree = "<group>"; };
+		B10019 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
+		B10020 /* CategoryTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTag.swift; sourceTree = "<group>"; };
+		B10021 /* StatusBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadge.swift; sourceTree = "<group>"; };
+		B10022 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B10023 /* GoalsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoalsApp.entitlements; sourceTree = "<group>"; };
+		B10024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B10025 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		B10026 /* UndoToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoToast.swift; sourceTree = "<group>"; };
+		B10027 /* AddBacklogIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBacklogIntent.swift; sourceTree = "<group>"; };
+		B10028 /* GoalsShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsShortcuts.swift; sourceTree = "<group>"; };
+		B10030 /* AlarmsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmsView.swift; sourceTree = "<group>"; };
+		B20001 /* GoalsWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsWidgetBundle.swift; sourceTree = "<group>"; };
+		B20002 /* GoalsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsWidget.swift; sourceTree = "<group>"; };
+		B20003 /* GoalsWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoalsWidget.entitlements; sourceTree = "<group>"; };
+		B20004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B20005 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
+		B20006 /* GoalsWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GoalsWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C10001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		W10002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D10001 = {
+			isa = PBXGroup;
+			children = (
+				D10002 /* GoalsApp */,
+				D20001 /* GoalsWidget */,
+				D10003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D10002 /* GoalsApp */ = {
+			isa = PBXGroup;
+			children = (
+				B10001 /* GoalsApp.swift */,
+				B10023 /* GoalsApp.entitlements */,
+				B10024 /* Info.plist */,
+				B10003 /* Assets.xcassets */,
+				D10004 /* Models */,
+				D10005 /* Services */,
+				D10006 /* Views */,
+				D10014 /* Intents */,
+				D10012 /* Utilities */,
+			);
+			path = GoalsApp;
+			sourceTree = "<group>";
+		};
+		D10003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B10000 /* GoalsApp.app */,
+				B20006 /* GoalsWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D10004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B10004 /* GoalsData.swift */,
+				B10005 /* DailyState.swift */,
+				B10006 /* YearState.swift */,
+				B10007 /* CheckStatus.swift */,
+				B10008 /* LogModels.swift */,
+				B20005 /* WidgetData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D10005 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B10009 /* iCloudFileManager.swift */,
+				B10010 /* GoalsStore.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D10006 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B10002 /* ContentView.swift */,
+				D10007 /* Daily */,
+				D10008 /* Year */,
+				D10009 /* Backlog */,
+				D10010 /* Bulbs */,
+				D10015 /* Alarms */,
+				D10011 /* Log */,
+				D10013 /* Shared */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D10007 /* Daily */ = {
+			isa = PBXGroup;
+			children = (
+				B10011 /* DailyGoalsView.swift */,
+				B10012 /* DailyGoalRow.swift */,
+			);
+			path = Daily;
+			sourceTree = "<group>";
+		};
+		D10008 /* Year */ = {
+			isa = PBXGroup;
+			children = (
+				B10013 /* YearGoalsView.swift */,
+				B10014 /* YearGoalCard.swift */,
+			);
+			path = Year;
+			sourceTree = "<group>";
+		};
+		D10009 /* Backlog */ = {
+			isa = PBXGroup;
+			children = (
+				B10015 /* BacklogView.swift */,
+			);
+			path = Backlog;
+			sourceTree = "<group>";
+		};
+		D10010 /* Bulbs */ = {
+			isa = PBXGroup;
+			children = (
+				B10016 /* BulbsView.swift */,
+			);
+			path = Bulbs;
+			sourceTree = "<group>";
+		};
+		D10015 /* Alarms */ = {
+			isa = PBXGroup;
+			children = (
+				B10030 /* AlarmsView.swift */,
+			);
+			path = Alarms;
+			sourceTree = "<group>";
+		};
+		D10011 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				B10017 /* LogView.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		D10012 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B10022 /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		D10013 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B10018 /* GoalDetailSheet.swift */,
+				B10019 /* CategoryPicker.swift */,
+				B10020 /* CategoryTag.swift */,
+				B10021 /* StatusBadge.swift */,
+				B10025 /* EmptyStateView.swift */,
+				B10026 /* UndoToast.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		D10014 /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				B10027 /* AddBacklogIntent.swift */,
+				B10028 /* GoalsShortcuts.swift */,
+			);
+			path = Intents;
+			sourceTree = "<group>";
+		};
+		D20001 /* GoalsWidget */ = {
+			isa = PBXGroup;
+			children = (
+				B20001 /* GoalsWidgetBundle.swift */,
+				B20002 /* GoalsWidget.swift */,
+				B20003 /* GoalsWidget.entitlements */,
+				B20007 /* Info.plist */,
+				B20004 /* Assets.xcassets */,
+			);
+			path = GoalsWidget;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E10001 /* GoalsApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F10003 /* Build configuration list for PBXNativeTarget "GoalsApp" */;
+			buildPhases = (
+				E10002 /* Sources */,
+				C10001 /* Frameworks */,
+				E10003 /* Resources */,
+				W10004 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				TD0001 /* PBXTargetDependency */,
+			);
+			name = GoalsApp;
+			productName = GoalsApp;
+			productReference = B10000 /* GoalsApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E20001 /* GoalsWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F20001 /* Build configuration list for PBXNativeTarget "GoalsWidgetExtension" */;
+			buildPhases = (
+				W10001 /* Sources */,
+				W10002 /* Frameworks */,
+				W10003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GoalsWidgetExtension;
+			productName = GoalsWidgetExtension;
+			productReference = B20006 /* GoalsWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E10004 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 2630;
+				TargetAttributes = {
+					E10001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					E20001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = F10001 /* Build configuration list for PBXProject "GoalsApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D10001;
+			productRefGroup = D10003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E10001 /* GoalsApp */,
+				E20001 /* GoalsWidgetExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E10003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		W10003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E10002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10001 /* GoalsApp.swift in Sources */,
+				A10002 /* ContentView.swift in Sources */,
+				A10004 /* GoalsData.swift in Sources */,
+				A10005 /* DailyState.swift in Sources */,
+				A10006 /* YearState.swift in Sources */,
+				A10007 /* CheckStatus.swift in Sources */,
+				A10008 /* LogModels.swift in Sources */,
+				A10009 /* iCloudFileManager.swift in Sources */,
+				A10010 /* GoalsStore.swift in Sources */,
+				A10011 /* DailyGoalsView.swift in Sources */,
+				A10012 /* DailyGoalRow.swift in Sources */,
+				A10013 /* YearGoalsView.swift in Sources */,
+				A10014 /* YearGoalCard.swift in Sources */,
+				A10015 /* BacklogView.swift in Sources */,
+				A10016 /* BulbsView.swift in Sources */,
+				A10017 /* LogView.swift in Sources */,
+				A10018 /* GoalDetailSheet.swift in Sources */,
+				A10019 /* CategoryPicker.swift in Sources */,
+				A10020 /* CategoryTag.swift in Sources */,
+				A10021 /* StatusBadge.swift in Sources */,
+				A10022 /* Constants.swift in Sources */,
+				A10023 /* EmptyStateView.swift in Sources */,
+				A10024 /* UndoToast.swift in Sources */,
+				A10025 /* AddBacklogIntent.swift in Sources */,
+				A10026 /* GoalsShortcuts.swift in Sources */,
+				A10027 /* WidgetData.swift in Sources */,
+				A10030 /* AlarmsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		W10001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20001 /* GoalsWidgetBundle.swift in Sources */,
+				A20002 /* GoalsWidget.swift in Sources */,
+				A20004 /* WidgetData.swift in Sources */,
+				A20005 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		TD0001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E20001 /* GoalsWidgetExtension */;
+			targetProxy = CI0001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F10004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4XARXA5LK3;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F10005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4XARXA5LK3;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F10006 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GoalsApp/GoalsApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GoalsApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fangbotu.goalsapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F10007 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GoalsApp/GoalsApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GoalsApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fangbotu.goalsapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F20002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GoalsWidget/GoalsWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GoalsWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GoalsWidget;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fangbotu.goalsapp.GoalsWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F20003 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GoalsWidget/GoalsWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GoalsWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GoalsWidget;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fangbotu.goalsapp.GoalsWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F10001 /* Build configuration list for PBXProject "GoalsApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10004 /* Debug */,
+				F10005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F10003 /* Build configuration list for PBXNativeTarget "GoalsApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10006 /* Debug */,
+				F10007 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F20001 /* Build configuration list for PBXNativeTarget "GoalsWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F20002 /* Debug */,
+				F20003 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E10004 /* Project object */;
+}
