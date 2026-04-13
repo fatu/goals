@@ -67,6 +67,15 @@ struct Bulb: Codable, Identifiable, Equatable {
     }
 }
 
+struct BiweeklyGoal: Codable, Identifiable, Equatable {
+    var id = UUID()
+    var text: String
+
+    enum CodingKeys: String, CodingKey {
+        case text
+    }
+}
+
 struct Alarm: Codable, Identifiable, Equatable {
     var id = UUID()
     var text: String
@@ -85,6 +94,7 @@ struct GoalsFile: Codable {
     var bulbs: [Bulb]
     var focus_videos: [String]
     var alarms: [Alarm]
+    var biweekly_goals: [BiweeklyGoal]
 
     init() {
         daily_goals = []
@@ -93,10 +103,11 @@ struct GoalsFile: Codable {
         bulbs = []
         focus_videos = []
         alarms = []
+        biweekly_goals = []
     }
 
     enum CodingKeys: String, CodingKey {
-        case daily_goals, year_goals, backlog, bulbs, focus_videos, alarms
+        case daily_goals, year_goals, backlog, bulbs, focus_videos, alarms, biweekly_goals
     }
 
     init(from decoder: Decoder) throws {
@@ -107,5 +118,6 @@ struct GoalsFile: Codable {
         bulbs = (try? container.decode([Bulb].self, forKey: .bulbs)) ?? []
         focus_videos = (try? container.decode([String].self, forKey: .focus_videos)) ?? []
         alarms = (try? container.decode([Alarm].self, forKey: .alarms)) ?? []
+        biweekly_goals = (try? container.decode([BiweeklyGoal].self, forKey: .biweekly_goals)) ?? []
     }
 }

@@ -84,6 +84,7 @@ struct BacklogView: View {
                 }
                 .searchable(text: $searchText, prompt: "Search backlog")
                 .navigationTitle("Backlog")
+                .iPadReadableWidth()
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button {

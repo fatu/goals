@@ -9,6 +9,7 @@ final class GoalsStore {
     var goals = GoalsFile()
     var dailyState = DailyState()
     var yearState = YearState()
+    var biweeklyState = BiweeklyState()
     var completedLog: [CompletedLogEntry] = []
     var focusLog: [FocusLogEntry] = []
 
@@ -53,6 +54,7 @@ final class GoalsStore {
             let g = await iCloudFileManager.shared.read(GoalsFile.self, from: "goals.json") ?? GoalsFile()
             let ds = await iCloudFileManager.shared.read(DailyState.self, from: ".daily_state.json") ?? DailyState()
             let ys = await iCloudFileManager.shared.read(YearState.self, from: ".year_state.json") ?? YearState()
+            let bws = await iCloudFileManager.shared.read(BiweeklyState.self, from: ".biweekly_state.json") ?? BiweeklyState()
             let cl = await iCloudFileManager.shared.read([CompletedLogEntry].self, from: "completed_log.json") ?? []
             let fl = await iCloudFileManager.shared.read([FocusLogEntry].self, from: "focus_log.json") ?? []
 
@@ -74,6 +76,13 @@ final class GoalsStore {
                     saveYearState()
                 } else {
                     self.yearState = ys
+                }
+
+                if !bws.isCurrent {
+                    self.biweeklyState = BiweeklyState()
+                    saveBiweeklyState()
+                } else {
+                    self.biweeklyState = bws
                 }
 
                 self.updateWidget()
@@ -319,6 +328,41 @@ final class GoalsStore {
         let today = DailyState.todayString()
         let item = BacklogItem(text: bulb.text, added_date: today, category: bulb.category)
         goals.backlog.append(item)
+        saveGoals()
+    }
+
+    // MARK: - Bi-Weekly Goals
+
+    func saveBiweeklyState() {
+        Task {
+            await iCloudFileManager.shared.write(biweeklyState, to: ".biweekly_state.json")
+        }
+    }
+
+    func biweeklyStatus(at index: Int) -> CheckStatus {
+        biweeklyState.checked[String(index)] ?? .todo
+    }
+
+    func toggleBiweeklyStatus(at index: Int) {
+        let key = String(index)
+        let current = biweeklyState.checked[key] ?? .todo
+        biweeklyState.checked[key] = current.next
+        saveBiweeklyState()
+    }
+
+    func addBiweeklyGoal(_ text: String) {
+        let goal = BiweeklyGoal(text: text)
+        goals.biweekly_goals.append(goal)
+        saveGoals()
+    }
+
+    func deleteBiweeklyGoal(at offsets: IndexSet) {
+        goals.biweekly_goals.remove(atOffsets: offsets)
+        saveGoals()
+    }
+
+    func moveBiweeklyGoal(from source: IndexSet, to destination: Int) {
+        goals.biweekly_goals.move(fromOffsets: source, toOffset: destination)
         saveGoals()
     }
 

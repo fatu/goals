@@ -14,6 +14,26 @@ enum Constants {
     static let appGroupID = "group.com.fangbotu.goalsapp"
 }
 
+// MARK: - iPad Readable Width
+
+struct iPadReadableWidthModifier: ViewModifier {
+    @Environment(\.horizontalSizeClass) private var sizeClass
+
+    func body(content: Content) -> some View {
+        if sizeClass == .regular {
+            content.contentMargins(.horizontal, 40, for: .scrollContent)
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    func iPadReadableWidth() -> some View {
+        modifier(iPadReadableWidthModifier())
+    }
+}
+
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

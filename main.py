@@ -9,7 +9,7 @@ import textwrap
 import threading
 import uuid
 import webbrowser
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
@@ -29,12 +29,15 @@ LOG_FILE = ICLOUD_DIR / "completed_log.json"
 FOCUS_LOG_FILE = ICLOUD_DIR / "focus_log.json"
 FOCUS_FILE = ICLOUD_DIR / ".focus_state.json"
 ATTACHMENTS_DIR = ICLOUD_DIR / "attachments"
+BIWEEKLY_STATE_FILE = ICLOUD_DIR / ".biweekly_state.json"
+BIWEEKLY_EPOCH = date(2026, 4, 6)
 
 # One-time migration from local directory to iCloud
 _LOCAL_DIR = Path(__file__).parent
 _MIGRATE_FILES = [
     "goals.json", ".daily_state.json", ".year_state.json",
     "completed_log.json", "focus_log.json", ".focus_state.json",
+    ".biweekly_state.json",
 ]
 for _fname in _MIGRATE_FILES:
     _src = _LOCAL_DIR / _fname
@@ -88,6 +91,34 @@ def load_year_state() -> dict:
 
 def save_year_state(state: dict) -> None:
     with open(YEAR_STATE_FILE, "w") as f:
+        json.dump(state, f, indent=2)
+
+
+def get_biweekly_period(today=None):
+    if today is None:
+        today = date.today()
+    if today < BIWEEKLY_EPOCH:
+        return BIWEEKLY_EPOCH, BIWEEKLY_EPOCH + timedelta(days=13)
+    days_since = (today - BIWEEKLY_EPOCH).days
+    period_index = days_since // 14
+    period_start = BIWEEKLY_EPOCH + timedelta(days=period_index * 14)
+    period_end = period_start + timedelta(days=13)
+    return period_start, period_end
+
+
+def load_biweekly_state() -> dict:
+    period_start, _ = get_biweekly_period()
+    period_key = str(period_start)
+    if BIWEEKLY_STATE_FILE.exists():
+        with open(BIWEEKLY_STATE_FILE) as f:
+            state = json.load(f)
+        if state.get("period_start") == period_key:
+            return state
+    return {"period_start": period_key, "checked": {}}
+
+
+def save_biweekly_state(state: dict) -> None:
+    with open(BIWEEKLY_STATE_FILE, "w") as f:
         json.dump(state, f, indent=2)
 
 
@@ -501,6 +532,7 @@ EDITOR_HTML = """<!DOCTYPE html>
     transition: opacity 0.15s; white-space: nowrap;
   }
   .alarm-add-btn:hover { opacity: 0.85; }
+  #daily-list, #biweekly-list, #backlog-list { min-height: 40px; }
 </style>
 </head>
 <body>
@@ -541,6 +573,11 @@ EDITOR_HTML = """<!DOCTYPE html>
         </div>
       </div>
       <div class="col">
+        <div class="section">
+          <div class="section-header" id="biweekly-header">📆 Bi-Weekly Goals</div>
+          <div id="biweekly-list"></div>
+          <button class="btn-add" onclick="addBiweeklyGoal()">➕ Add Bi-Weekly Goal</button>
+        </div>
         <div class="section">
           <div class="section-header">📦 Backlog</div>
           <div id="backlog-list"></div>
@@ -779,6 +816,7 @@ async function load() {
 function render() {
   renderList('daily-list', goals.daily_goals || [], 'daily');
   renderYearProgress();
+  renderBiweeklyList();
   renderBacklog();
   renderBulbs();
   renderAlarms();
@@ -813,6 +851,13 @@ function renderBacklog() {
   items.forEach((item, i) => {
     const div = document.createElement('div');
     div.className = 'goal-item';
+    div.draggable = true;
+    div.dataset.index = i;
+    div.dataset.type = 'backlog';
+    const handle = document.createElement('span');
+    handle.className = 'drag-handle';
+    handle.textContent = '\u283F';
+    div.appendChild(handle);
     const span = document.createElement('span');
     span.className = 'item-text' + (item.attachment ? ' has-attach' : '');
     span.textContent = item.text || '(empty)';
@@ -836,12 +881,24 @@ function renderBacklog() {
     btnToday.className = 'btn-today';
     btnToday.textContent = '📅 Today';
     btnToday.addEventListener('click', () => addToToday(i));
+    const btnBiweekly = document.createElement('button');
+    btnBiweekly.className = 'btn-today';
+    btnBiweekly.style.color = '#9b59b6';
+    btnBiweekly.textContent = '📆';
+    btnBiweekly.title = 'Move to Bi-Weekly Goals';
+    btnBiweekly.addEventListener('click', () => backlogToBiweekly(i));
     const btnRemove = document.createElement('button');
     btnRemove.className = 'btn-remove';
     btnRemove.textContent = '✕';
     btnRemove.addEventListener('click', () => deleteItem('backlog', i));
     div.appendChild(btnToday);
+    div.appendChild(btnBiweekly);
     div.appendChild(btnRemove);
+    div.addEventListener('dragstart', onDragStart);
+    div.addEventListener('dragover', onDragOver);
+    div.addEventListener('dragleave', onDragLeave);
+    div.addEventListener('drop', onDrop);
+    div.addEventListener('dragend', onDragEnd);
     el.appendChild(div);
   });
 }
@@ -863,6 +920,64 @@ async function addToToday(idx) {
     goals = await fresh.json();
     render();
   }
+}
+function backlogToBiweekly(idx) {
+  const item = (goals.backlog || [])[idx];
+  if (!item) return;
+  if (!goals.biweekly_goals) goals.biweekly_goals = [];
+  goals.biweekly_goals.push(Object.assign({}, item));
+  goals.backlog.splice(idx, 1);
+  save();
+}
+function renderBiweeklyList() {
+  const el = document.getElementById('biweekly-list');
+  const items = goals.biweekly_goals || [];
+  el.innerHTML = '';
+  items.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'goal-item';
+    div.draggable = true;
+    div.dataset.index = i;
+    div.dataset.type = 'biweekly';
+    const handle = document.createElement('span');
+    handle.className = 'drag-handle';
+    handle.textContent = '\u283F';
+    const span = document.createElement('span');
+    span.className = 'item-text' + (item.attachment ? ' has-attach' : '');
+    span.textContent = item.text || '(empty)';
+    span.addEventListener('click', () => openDetail('biweekly_goals', i));
+    div.appendChild(handle);
+    div.appendChild(span);
+    const btn = document.createElement('button');
+    btn.className = 'btn-remove';
+    btn.textContent = '\u2715';
+    btn.addEventListener('click', () => deleteItem('biweekly_goals', i));
+    div.appendChild(btn);
+    div.addEventListener('dragstart', onDragStart);
+    div.addEventListener('dragover', onDragOver);
+    div.addEventListener('dragleave', onDragLeave);
+    div.addEventListener('drop', onDrop);
+    div.addEventListener('dragend', onDragEnd);
+    el.appendChild(div);
+  });
+  // Update header with period date range
+  const header = document.getElementById('biweekly-header');
+  if (header) {
+    const epoch = new Date('2026-04-06T00:00:00');
+    const today = new Date(); today.setHours(0,0,0,0);
+    const diffDays = Math.floor((today - epoch) / 86400000);
+    const periodIdx = Math.max(0, Math.floor(diffDays / 14));
+    const start = new Date(epoch.getTime() + periodIdx * 14 * 86400000);
+    const end = new Date(start.getTime() + 13 * 86400000);
+    const fmt = d => d.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+    header.textContent = String.fromCodePoint(0x1F4C6) + ' Bi-Weekly Goals (' + fmt(start) + ' \u2013 ' + fmt(end) + ')';
+  }
+}
+function addBiweeklyGoal() {
+  if (!goals.biweekly_goals) goals.biweekly_goals = [];
+  goals.biweekly_goals.push({ text: '' });
+  render();
+  openDetail('biweekly_goals', goals.biweekly_goals.length - 1);
 }
 function renderAlarms() {
   const el = document.getElementById('alarms-list');
@@ -1125,7 +1240,7 @@ function buildCategorySelect() {
 }
 function renderList(containerId, items, type) {
   const el = document.getElementById(containerId);
-  const key = type === 'daily' ? 'daily_goals' : 'year_goals';
+  const key = {daily:'daily_goals', year:'year_goals', biweekly:'biweekly_goals'}[type] || 'daily_goals';
   el.innerHTML = '';
   items.forEach((item, i) => {
     const div = document.createElement('div');
@@ -1179,9 +1294,15 @@ function onDragStart(e) {
   dragItem = { type: e.currentTarget.dataset.type, index: parseInt(e.currentTarget.dataset.index) };
   e.currentTarget.classList.add('dragging');
 }
+const crossDropRoutes = {daily:'backlog', backlog:'biweekly', biweekly:'daily'};
+const typeToKey = {daily:'daily_goals', year:'year_goals', biweekly:'biweekly_goals', backlog:'backlog'};
+function canDrop(from, to) {
+  if (from === to) return true;
+  return crossDropRoutes[from] === to;
+}
 function onDragOver(e) {
   e.preventDefault();
-  if (e.currentTarget.dataset.type === dragItem?.type) e.currentTarget.classList.add('drag-over');
+  if (dragItem && canDrop(dragItem.type, e.currentTarget.dataset.type)) e.currentTarget.classList.add('drag-over');
 }
 function onDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
 function onDrop(e) {
@@ -1189,17 +1310,57 @@ function onDrop(e) {
   e.currentTarget.classList.remove('drag-over');
   const toType = e.currentTarget.dataset.type;
   const toIndex = parseInt(e.currentTarget.dataset.index);
-  if (dragItem && dragItem.type === toType && dragItem.index !== toIndex) {
-    const key = toType === 'daily' ? 'daily_goals' : 'year_goals';
+  if (!dragItem) return;
+  const fromType = dragItem.type;
+  if (fromType === toType && dragItem.index !== toIndex) {
+    // Reorder within same section
+    const key = typeToKey[toType];
     const [moved] = goals[key].splice(dragItem.index, 1);
     goals[key].splice(toIndex, 0, moved);
     render();
+  } else if (fromType !== toType && canDrop(fromType, toType)) {
+    // Cross-section move
+    const fromKey = typeToKey[fromType];
+    const toKey = typeToKey[toType];
+    const item = goals[fromKey][dragItem.index];
+    goals[fromKey].splice(dragItem.index, 1);
+    const newItem = Object.assign({}, item);
+    if (toType === 'daily' || toType === 'backlog') newItem.added_date = newItem.added_date || new Date().toISOString().slice(0,10);
+    goals[toKey].splice(toIndex, 0, newItem);
+    save();
   }
 }
 function onDragEnd(e) { e.currentTarget.classList.remove('dragging'); dragItem = null; }
+function setupDropZone(containerId, targetType) {
+  const el = document.getElementById(containerId);
+  el.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    if (dragItem && canDrop(dragItem.type, targetType)) el.style.outline = '2px dashed #667eea';
+  });
+  el.addEventListener('dragleave', (e) => {
+    if (!el.contains(e.relatedTarget)) el.style.outline = '';
+  });
+  el.addEventListener('drop', (e) => {
+    el.style.outline = '';
+    if (!dragItem || e.target !== el) return;
+    e.preventDefault();
+    const fromType = dragItem.type;
+    if (fromType === targetType) return;
+    if (!canDrop(fromType, targetType)) return;
+    const fromKey = typeToKey[fromType];
+    const toKey = typeToKey[targetType];
+    const item = goals[fromKey][dragItem.index];
+    goals[fromKey].splice(dragItem.index, 1);
+    const newItem = Object.assign({}, item);
+    if (targetType === 'daily' || targetType === 'backlog') newItem.added_date = newItem.added_date || new Date().toISOString().slice(0,10);
+    goals[toKey].push(newItem);
+    save();
+  });
+}
 async function save() {
   goals.daily_goals = (goals.daily_goals || []).filter(g => g.text.trim());
   goals.year_goals = (goals.year_goals || []).filter(g => g.text.trim());
+  goals.biweekly_goals = (goals.biweekly_goals || []).filter(g => g.text.trim());
   goals.year_goals.forEach(g => {
     if (g.sub_goals) g.sub_goals = g.sub_goals.filter(s => s.text.trim());
   });
@@ -1230,6 +1391,9 @@ function switchPage(page) {
 }
 function nowHHMM() { const n = new Date(); return String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0'); }
 load();
+setupDropZone('daily-list', 'daily');
+setupDropZone('biweekly-list', 'biweekly');
+setupDropZone('backlog-list', 'backlog');
 // Default alarm inputs to today + now
 document.getElementById('alarm-date').value = new Date().toISOString().slice(0,10);
 document.getElementById('alarm-time').value = nowHHMM();
@@ -1433,6 +1597,7 @@ class GoalsStickerApp(rumps.App):
         self._focus_state = load_focus_state()
         self.daily_state = load_daily_state()
         self.year_state = load_year_state()
+        self.biweekly_state = load_biweekly_state()
         self.goals_data = load_goals()
         self._goals_mtime = DATA_FILE.stat().st_mtime if DATA_FILE.exists() else 0
         if self.daily_state.get("date") != str(date.today()):
@@ -1847,6 +2012,7 @@ class GoalsStickerApp(rumps.App):
         self.goals_data = load_goals()
         self.daily_state = load_daily_state()
         self.year_state = load_year_state()
+        self.biweekly_state = load_biweekly_state()
         self._build_menu()
 
     def _noop(self, _):
@@ -1980,6 +2146,15 @@ class GoalsStickerApp(rumps.App):
             self._build_menu()
         return toggle
 
+    def _make_biweekly_toggle(self, idx: int):
+        def toggle(_):
+            key = str(idx)
+            current = self._normalize_status(self.biweekly_state["checked"].get(key))
+            self.biweekly_state["checked"][key] = self._next_status(current)
+            save_biweekly_state(self.biweekly_state)
+            self._build_menu()
+        return toggle
+
     def _view_log(self, _):
         log_viewer = Path(__file__).parent / "log_viewer.py"
         p = subprocess.Popen(
@@ -2071,6 +2246,7 @@ class GoalsStickerApp(rumps.App):
             self.goals_data = load_goals()
             self.daily_state = load_daily_state()
             self.year_state = load_year_state()
+            self.biweekly_state = load_biweekly_state()
             self._build_menu()
 
     @rumps.timer(60)
@@ -2085,6 +2261,11 @@ class GoalsStickerApp(rumps.App):
         if self.year_state.get("year") != str(date.today().year):
             self.year_state = {"year": str(date.today().year), "checked": {}}
             save_year_state(self.year_state)
+            self._build_menu()
+        bw_start, _ = get_biweekly_period()
+        if self.biweekly_state.get("period_start") != str(bw_start):
+            self.biweekly_state = {"period_start": str(bw_start), "checked": {}}
+            save_biweekly_state(self.biweekly_state)
             self._build_menu()
 
 

@@ -95,6 +95,7 @@ struct BulbsView: View {
                 }
                 .searchable(text: $searchText, prompt: "Search ideas")
                 .navigationTitle("Bulbs")
+                .iPadReadableWidth()
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button {

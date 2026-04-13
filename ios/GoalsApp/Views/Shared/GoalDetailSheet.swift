@@ -120,6 +120,8 @@ struct GoalDetailSheet: View {
                     }
                 }
             }
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
             .quickLookPreview($previewURL)
             .onAppear {
                 if let sd = scheduledDate, let d = parseDate(sd) {

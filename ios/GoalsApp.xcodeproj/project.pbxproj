@@ -35,6 +35,8 @@
 		A10026 /* GoalsShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10028 /* GoalsShortcuts.swift */; };
 		A10027 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20005 /* WidgetData.swift */; };
 		A10030 /* AlarmsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10030 /* AlarmsView.swift */; };
+		A10031 /* BiweeklyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10031 /* BiweeklyState.swift */; };
+		A10032 /* BiweeklyGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10032 /* BiweeklyGoalsView.swift */; };
 		A20001 /* GoalsWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20001 /* GoalsWidgetBundle.swift */; };
 		A20002 /* GoalsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20002 /* GoalsWidget.swift */; };
 		A20003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B20004 /* Assets.xcassets */; };
@@ -98,6 +100,8 @@
 		B10027 /* AddBacklogIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBacklogIntent.swift; sourceTree = "<group>"; };
 		B10028 /* GoalsShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsShortcuts.swift; sourceTree = "<group>"; };
 		B10030 /* AlarmsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmsView.swift; sourceTree = "<group>"; };
+		B10031 /* BiweeklyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiweeklyState.swift; sourceTree = "<group>"; };
+		B10032 /* BiweeklyGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiweeklyGoalsView.swift; sourceTree = "<group>"; };
 		B20001 /* GoalsWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsWidgetBundle.swift; sourceTree = "<group>"; };
 		B20002 /* GoalsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsWidget.swift; sourceTree = "<group>"; };
 		B20003 /* GoalsWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoalsWidget.entitlements; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 				B10006 /* YearState.swift */,
 				B10007 /* CheckStatus.swift */,
 				B10008 /* LogModels.swift */,
+				B10031 /* BiweeklyState.swift */,
 				B20005 /* WidgetData.swift */,
 			);
 			path = Models;
@@ -190,6 +195,7 @@
 				D10009 /* Backlog */,
 				D10010 /* Bulbs */,
 				D10015 /* Alarms */,
+				D10016 /* Biweekly */,
 				D10011 /* Log */,
 				D10013 /* Shared */,
 			);
@@ -236,6 +242,14 @@
 				B10030 /* AlarmsView.swift */,
 			);
 			path = Alarms;
+			sourceTree = "<group>";
+		};
+		D10016 /* Biweekly */ = {
+			isa = PBXGroup;
+			children = (
+				B10032 /* BiweeklyGoalsView.swift */,
+			);
+			path = Biweekly;
 			sourceTree = "<group>";
 		};
 		D10011 /* Log */ = {
@@ -415,6 +429,8 @@
 				A10026 /* GoalsShortcuts.swift in Sources */,
 				A10027 /* WidgetData.swift in Sources */,
 				A10030 /* AlarmsView.swift in Sources */,
+				A10031 /* BiweeklyState.swift in Sources */,
+				A10032 /* BiweeklyGoalsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

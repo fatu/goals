@@ -3,6 +3,7 @@ import Charts
 
 struct LogView: View {
     @Environment(GoalsStore.self) private var store
+    @Environment(\.horizontalSizeClass) private var sizeClass
     @State private var selectedTab = 0
 
     var body: some View {
@@ -94,13 +95,22 @@ struct LogView: View {
                 // Summary stats
                 Section {
                     VStack(spacing: 8) {
-                        HStack(spacing: 12) {
-                            statCard(title: "Total", value: formatDuration(totalSeconds), color: .blue)
-                            statCard(title: "Daily Avg", value: formatDuration(dailyAvgSeconds), color: .green)
-                        }
-                        HStack(spacing: 12) {
-                            statCard(title: "Weekly Avg", value: formatDuration(weeklyAvgSeconds), color: .purple)
-                            thisWeekCard
+                        if sizeClass == .regular {
+                            HStack(spacing: 12) {
+                                statCard(title: "Total", value: formatDuration(totalSeconds), color: .blue)
+                                statCard(title: "Daily Avg", value: formatDuration(dailyAvgSeconds), color: .green)
+                                statCard(title: "Weekly Avg", value: formatDuration(weeklyAvgSeconds), color: .purple)
+                                thisWeekCard
+                            }
+                        } else {
+                            HStack(spacing: 12) {
+                                statCard(title: "Total", value: formatDuration(totalSeconds), color: .blue)
+                                statCard(title: "Daily Avg", value: formatDuration(dailyAvgSeconds), color: .green)
+                            }
+                            HStack(spacing: 12) {
+                                statCard(title: "Weekly Avg", value: formatDuration(weeklyAvgSeconds), color: .purple)
+                                thisWeekCard
+                            }
                         }
                     }
                     .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
@@ -115,7 +125,7 @@ struct LogView: View {
                         )
                         .foregroundStyle(.blue.gradient)
                     }
-                    .frame(height: 200)
+                    .frame(height: sizeClass == .regular ? 300 : 200)
                     .padding(.vertical, 8)
                 } header: {
                     Text("Focus Time (hours)")

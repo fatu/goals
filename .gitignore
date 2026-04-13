@@ -13,6 +13,7 @@ wheels/
 .daily_state.json
 .year_state.json
 .focus_state.json
+.biweekly_state.json
 
 # Personal data
 goals.json

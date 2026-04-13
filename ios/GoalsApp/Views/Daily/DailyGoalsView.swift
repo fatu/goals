@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DailyGoalsView: View {
     @Environment(GoalsStore.self) private var store
+    @Environment(\.horizontalSizeClass) private var sizeClass
     @State private var showAdd = false
     @State private var editingIndex: Int?
 
@@ -78,6 +79,7 @@ struct DailyGoalsView: View {
                     alarmsSection
                 }
                 .navigationTitle("Today")
+                .iPadReadableWidth()
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
@@ -216,7 +218,7 @@ struct DailyGoalsView: View {
                         .font(.caption)
                         .fontWeight(.semibold)
                 }
-                .frame(width: 52, height: 52)
+                .frame(width: sizeClass == .regular ? 72 : 52, height: sizeClass == .regular ? 72 : 52)
             }
 
             if total > 0 {
@@ -368,6 +370,8 @@ struct DailyGoalsView: View {
                 }
             }
         }
+        .presentationDetents([.large])
+        .presentationDragIndicator(.visible)
     }
 }
 
