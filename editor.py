@@ -6,7 +6,9 @@ import webbrowser
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
-DATA_FILE = Path(__file__).parent / "goals.json"
+ICLOUD_DIR = Path.home() / "Library/Mobile Documents/iCloud~com~fangbotu~goalsapp/Documents"
+ICLOUD_DIR.mkdir(parents=True, exist_ok=True)
+DATA_FILE = ICLOUD_DIR / "goals.json"
 PORT = 5050
 
 HTML = """<!DOCTYPE html>

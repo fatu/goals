@@ -1294,11 +1294,11 @@ function onDragStart(e) {
   dragItem = { type: e.currentTarget.dataset.type, index: parseInt(e.currentTarget.dataset.index) };
   e.currentTarget.classList.add('dragging');
 }
-const crossDropRoutes = {daily:'backlog', backlog:'biweekly', biweekly:'daily'};
+const crossDropRoutes = {daily:['backlog','biweekly'], backlog:['biweekly'], biweekly:['daily']};
 const typeToKey = {daily:'daily_goals', year:'year_goals', biweekly:'biweekly_goals', backlog:'backlog'};
 function canDrop(from, to) {
   if (from === to) return true;
-  return crossDropRoutes[from] === to;
+  return (crossDropRoutes[from] || []).includes(to);
 }
 function onDragOver(e) {
   e.preventDefault();
@@ -1307,6 +1307,7 @@ function onDragOver(e) {
 function onDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
 function onDrop(e) {
   e.preventDefault();
+  e.stopPropagation();
   e.currentTarget.classList.remove('drag-over');
   const toType = e.currentTarget.dataset.type;
   const toIndex = parseInt(e.currentTarget.dataset.index);
@@ -1342,7 +1343,7 @@ function setupDropZone(containerId, targetType) {
   });
   el.addEventListener('drop', (e) => {
     el.style.outline = '';
-    if (!dragItem || e.target !== el) return;
+    if (!dragItem) return;
     e.preventDefault();
     const fromType = dragItem.type;
     if (fromType === targetType) return;
