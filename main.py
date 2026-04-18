@@ -1331,7 +1331,14 @@ function onDrop(e) {
     save();
   }
 }
-function onDragEnd(e) { e.currentTarget.classList.remove('dragging'); dragItem = null; }
+function onDragEnd(e) {
+  e.currentTarget.classList.remove('dragging');
+  dragItem = null;
+  ['daily-list','biweekly-list','backlog-list'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.outline = '';
+  });
+}
 function setupDropZone(containerId, targetType) {
   const el = document.getElementById(containerId);
   el.addEventListener('dragover', (e) => {
